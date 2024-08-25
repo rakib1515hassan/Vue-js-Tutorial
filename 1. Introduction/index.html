@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My first Vue page</title>
+    <style>
+        #app {
+            display: inline-block;
+            padding: 10px;
+            font-size: x-large;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Vue Example</h1>
+
+    <p>The message is taken from 'data' inside the Vue instance by writing {{ message }} inside the div with id="app".
+    </p>
+
+    <div id="app">
+        {{ message }}
+
+
+        <p><strong>Name:</strong> {{name}}</p>
+        
+        <p><strong>Work:</strong> {{work}}</p>
+        
+        <p><strong>Student:</strong> {{student}}</p>
+        
+        <p><strong>Skill:</strong>
+            <span>{{skill[0]}}</span>
+            <span>{{skill[1]}}</span>
+            <span>{{skill[2]}}</span>
+        </p>
+        
+        <p><strong>Address: </strong>
+            <span>{{address.jila}}</span>,
+            <span>{{address.division}}</span>,
+            <span>{{address.country}}</span>,
+        </p>
+        
+        <p><strong>Experience:</strong> {{experience()}}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: "Hello World!",
+
+                    name: "Md Rakib Hassan",
+                    work: "Python With Django",
+                    student: true,
+
+                    // Array
+                    skill: ["Python", "Django", "Vue"],
+
+                    // Object
+                    address: {
+                        jila: "Chandpur",
+                        division: "Chitogong",
+                        country: "Bangladesh",
+                    },
+
+                    // ES6 Functions
+                    experience: () => {
+                        return "Total 1 Year of Experience.";
+                    }
+                }
+                
+            }
+        })
+
+        app.mount('#app')
+
+    </script>
+
+</body>
+
+</html>
