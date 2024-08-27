@@ -33,6 +33,13 @@
                 </li>
             </ul>
 
+            <hr>
+            <ul>
+                <li v-for="item in items2">
+                    {{ item.message }}
+                </li>
+            </ul>
+
             <!-- Button to add items -->
             <button @click="addItem" class="btn btn-primary mt-3">Add Item</button>
         </div>
@@ -57,11 +64,14 @@
                         { id: 2, name: 'Banana' },
                         { id: 3, name: 'Cherry' }
                     ],
+
                     objectItems: {
                         'A': 'Apple',
                         'B': 'Banana',
                         'C': 'Cherry'
-                    }
+                    },
+
+                    items2: [{ message: 'Foo' }, { message: 'Bar' }]
                 };
             },
             methods: {

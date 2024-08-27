@@ -1,0 +1,136 @@
+Shorthand
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Shorthand Example</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Learn <span class="text-success">Shorthand Syntax</span></h4>
+        <hr>
+
+        <div id="app">
+            <h3 class="text-primary">v-bind Shorthand (:)</h3>
+            <!-- Full Syntax -->
+            <img v-bind:src="imageUrl" alt="Vue logo">
+            
+            <!-- Shorthand Syntax -->
+            <img :src="imageUrl" alt="Vue logo">
+
+    
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">v-on Shorthand (@)</h3>
+            <!-- Full Syntax -->
+            <button v-on:click="handleClick">Click Me</button>
+            
+            <!-- Shorthand Syntax -->
+            <button @click="handleClick">Click Me</button>
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">v-model Shorthand</h3>
+            <!-- Full Syntax -->
+            <input v-model="message" type="text">
+            
+            <!-- Shorthand Syntax -->
+            <input v-model="message" type="text">
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">v-for Shorthand</h3>
+            <!-- Full Syntax -->
+            <ul>
+                <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+            </ul>
+            
+            <!-- Shorthand Syntax -->
+            <ul>
+                <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+            </ul>
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">. v-if, v-else-if, v-else Shorthand</h3>
+            <!-- Full Syntax -->
+            <p v-if="isLoggedIn">Welcome back!</p>
+            <p v-else>Please log in.</p>
+            
+            <!-- Shorthand Syntax -->
+            <p v-if="isLoggedIn">Welcome back!</p>
+            <p v-else>Please log in.</p>
+
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">Dynamic Arguments</h3>
+            <!-- Full Syntax -->
+            <button v-bind:[attribute]="value">Click Me</button>
+            
+            <!-- Shorthand Syntax -->
+            <button :[attribute]="value">Click Me</button>
+
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+            <h3 class="text-primary">Short-Circuit for v-if and v-for</h3>
+            <!-- Full Syntax -->
+            <template v-if="items.length > 0">
+                <ul>
+                    <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+                </ul>
+            </template>
+            
+            <!-- Short-Circuit -->
+            <template v-if="items.length > 0">
+                <ul>
+                    <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+                </ul>
+            </template>
+
+        </div>
+    </div>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    message: '',
+                    imageUrl: 'https://vuejs.org/images/logo.png',
+                    items: [
+                        { id: 1, name: 'Apple' },
+                        { id: 2, name: 'Banana' },
+                        { id: 3, name: 'Orange' }
+                    ],
+                    isLoggedIn: true
+                };
+            },
+            methods: {
+                handleClick() {
+                    alert('Button clicked!');
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

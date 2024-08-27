@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js v-on Modifiers Example</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Learn <span class="text-success">v-on Modifiers</span></h4>
+        <hr>
+
+        <div id="app">
+            <h1 class="text-success mb-2">Example 1: .prevent Modifier</h1>
+            <!-- Prevents the default action of the form submission -->
+            <form @submit.prevent="submitForm" class="mb-3">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" v-model="name" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <p class="alert alert-info">Submitted Name: {{ submittedName }}</p>
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+
+            <h1 class="text-success mb-2">Example 2: .stop and .once Modifiers</h1>
+            <!-- Stops the event from propagating and triggers it only once -->
+            <button @click.stop.once="handleClick" class="btn btn-warning mb-3">Click Me (Only Once)</button>
+            <p class="alert alert-success">Click Count: {{ clickCount }}</p>
+
+            <!-- =========================================== -->
+            <hr>
+            <!-- =========================================== -->
+
+            <h1 class="text-success mb-2">Example 3: .self Modifier</h1>
+            <!-- Only triggers the event when clicking on the exact element, not its children -->
+            <div @click.self="toggleBox" class="p-3 border border-primary" style="cursor: pointer;">
+                <p v-if="boxVisible" class="alert alert-primary">You clicked exactly on the box!</p>
+                <p v-else class="text-muted">Click exactly on the box to see the message.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    name: '',
+                    submittedName: '',
+                    clickCount: 0,
+                    boxVisible: false
+                };
+            },
+            methods: {
+                submitForm() {
+                    // Handle form submission
+                    this.submittedName = this.name;
+                    this.name = '';  // Clear the input field
+                },
+                handleClick() {
+                    // Increment the click count
+                    this.clickCount += 1;
+                },
+                toggleBox() {
+                    // Toggle the visibility of the box
+                    this.boxVisible = !this.boxVisible;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

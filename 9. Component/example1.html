@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Component Example</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Component Example</h4>
+        <hr>
+
+        <!-- Vue App Mount Point -->
+        <div id="app">
+            <user-card></user-card> <!-- Using the UserCard component -->
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        // Ensure Vue is loaded
+        if (window.Vue) {
+            // Define the UserCard component
+            const UserCard = {
+                template: `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">User Information</h5>
+                            <p class="card-text">Name: {{ user.name }}</p>
+                            <p class="card-text">Age: {{ user.age }}</p>
+                            <button @click="updateUser" class="btn btn-primary">Update User</button>
+                        </div>
+                    </div>
+                `,
+                data() {
+                    return {
+                        user: {
+                            name: 'John Doe',
+                            age: 30
+                        }
+                    };
+                },
+                methods: {
+                    updateUser() {
+                        // For demonstration, just update the name and age
+                        this.user.name = 'Jane Smith';
+                        this.user.age = 28;
+                    }
+                }
+            };
+
+            // Create and mount the Vue application
+            Vue.createApp({
+                components: {
+                    UserCard // Register the UserCard component locally
+                }
+            }).mount('#app');
+        } else {
+            console.error('Vue is not loaded.');
+        }
+    </script>
+</body>
+
+</html>

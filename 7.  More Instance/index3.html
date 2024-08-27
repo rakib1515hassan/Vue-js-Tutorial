@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Parent-Child Communication</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" class="container mt-5">
+        <h1 class="text-center">Vue.js Parent-Child Communication</h1>
+
+        <!-- Parent Component -->
+        <parent-component></parent-component>
+    </div>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp, defineComponent } = Vue;
+
+        // Child Component
+        const ChildComponent = defineComponent({
+            props: {
+                message: {
+                    type: String,
+                    required: true
+                }
+            },
+            emits: ['updateMessage'],
+            methods: {
+                sendMessageToParent() {
+                    this.$emit('updateMessage', 'Hello from Child Component!');
+                }
+            },
+            template: `
+                <div class="border p-3 mb-3">
+                    <h4>Child Component</h4>
+                    <p>Received Message from Parent: {{ message }}</p>
+                    <button @click="sendMessageToParent" class="btn btn-primary">Send Message to Parent</button>
+                </div>
+            `
+        });
+
+        // Parent Component
+        const ParentComponent = defineComponent({
+            components: {
+                ChildComponent
+            },
+            data() {
+                return {
+                    parentMessage: 'Hello from Parent Component!',
+                    childMessage: ''
+                };
+            },
+            methods: {
+                handleChildMessage(message) {
+                    this.childMessage = message;
+                }
+            },
+            template: `
+                <div>
+                    <h2>Parent Component</h2>
+                    <p>Message to Child: {{ parentMessage }}</p>
+                    <child-component :message="parentMessage" @updateMessage="handleChildMessage"></child-component>
+                    <p>Message from Child: {{ childMessage }}</p>
+                </div>
+            `
+        });
+
+        // Create Vue App
+        createApp(ParentComponent).mount('#app');
+    </script>
+</body>
+
+</html>

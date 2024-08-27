@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Multiple Instances with Computed Properties</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Multiple Instances with <span class="text-success">Computed Properties</span></h4>
+        <hr>
+
+        <div id="app1">
+            <h2 class="text-success mb-3">Instance 1: Age Group</h2>
+            <div class="mb-3">
+                <label for="age1" class="form-label">Age:</label>
+                <input type="number" id="age1" v-model.number="age" class="form-control">
+            </div>
+            <p class="alert alert-info">You are an: {{ ageGroup }}</p>
+        </div>
+
+        <div id="app2">
+            <h2 class="text-success mb-3">Instance 2: Cart Total</h2>
+            <div class="mb-3">
+                <label for="itemPrice" class="form-label">Item Price:</label>
+                <input type="number" id="itemPrice" v-model.number="itemPrice" class="form-control"
+                    placeholder="Item Price">
+                <label for="quantity" class="form-label mt-2">Quantity:</label>
+                <input type="number" id="quantity" v-model.number="quantity" class="form-control"
+                    placeholder="Quantity">
+            </div>
+            <p class="alert alert-info">Total Cost: {{ totalCost }}</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        // Instance 1: Age Group
+        createApp({
+            data() {
+                return {
+                    age: 0
+                };
+            },
+            computed: {
+                ageGroup() {
+                    if (this.age < 13) return 'Child';
+                    if (this.age < 20) return 'Teenager';
+                    if (this.age < 65) return 'Adult';
+                    return 'Senior';
+                }
+            }
+        }).mount('#app1');
+
+        // Instance 2: Cart Total
+        createApp({
+            data() {
+                return {
+                    itemPrice: 0,
+                    quantity: 0
+                };
+            },
+            computed: {
+                totalCost() {
+                    return this.itemPrice * this.quantity;
+                }
+            }
+        }).mount('#app2');
+    </script>
+</body>
+
+</html>

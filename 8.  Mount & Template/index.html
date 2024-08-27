@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Mounting and Template Example</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Learn <span class="text-success">Mounting and Template</span></h4>
+        <hr>
+
+        <div id="app">
+            <h2 class="text-success mb-3">User Information</h2>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" v-model="user.name" class="form-control" placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Age:</label>
+                <input type="number" id="age" v-model="user.age" class="form-control" placeholder="Enter your age">
+            </div>
+            <button @click="updateGreeting" class="btn btn-primary mb-3">Update Greeting</button>
+            <p class="alert alert-info">Greeting: {{ greeting }}</p>
+            <p class="alert alert-info">Full Name: {{ user.name }} (Age: {{ user.age }})</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        // Vue instance
+        createApp({
+            data() {
+                return {
+                    user: {
+                        name: '',
+                        age: ''
+                    },
+                    greeting: 'Hello!'
+                };
+            },
+            methods: {
+                updateGreeting() {
+                    this.greeting = `Hello, ${this.user.name}! You are ${this.user.age} years old.`;
+                }
+            }
+        }).mount('#app'); // Mount the Vue instance to the element with id="app"
+    </script>
+</body>
+
+</html>

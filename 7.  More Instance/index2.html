@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Event Bus Example</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 bg-primary text-center text-light">Vue JS</h1>
+        <h4 class="text-center">Communicate Between Instances with <span class="text-success">Event Bus</span></h4>
+        <hr>
+
+        <div id="app1">
+            <h2 class="text-success mb-3">Instance 1: Control Panel</h2>
+            <button @click="emitUpdate" class="btn btn-primary">Update Instance 2</button>
+        </div>
+
+        <div id="app2">
+            <h2 class="text-success mb-3">Instance 2: Display</h2>
+            <p class="alert alert-info">Received Message: {{ message }}</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script>
+        // Create an event bus using a simple JavaScript object
+        const EventBus = {
+            events: {},
+            $on(event, callback) {
+                if (!this.events[event]) {
+                    this.events[event] = [];
+                }
+                this.events[event].push(callback);
+            },
+            $emit(event, data) {
+                if (this.events[event]) {
+                    this.events[event].forEach(callback => callback(data));
+                }
+            }
+        };
+
+        const { createApp } = Vue;
+
+        // Instance 1: Control Panel
+        createApp({
+            methods: {
+                emitUpdate() {
+                    // Emit an event to the event bus
+                    EventBus.$emit('updateMessage', 'Hello from Instance 1!');
+                }
+            }
+        }).mount('#app1');
+
+        // Instance 2: Display
+        createApp({
+            data() {
+                return {
+                    message: 'No message yet'
+                };
+            },
+            created() {
+                // Listen for events from the event bus
+                EventBus.$on('updateMessage', (newMessage) => {
+                    this.message = newMessage;
+                });
+            }
+        }).mount('#app2');
+    </script>
+</body>
+
+</html>
