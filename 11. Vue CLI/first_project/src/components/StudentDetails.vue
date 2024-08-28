@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div style="margin-bottom: 30px;">
     <h3>Student Details</h3>
     <table class="student-details-table">
       <tr>
         <th>Name</th>
-        <td>{{ name }}</td>
+        <td>{{ fullname }}</td>
       </tr>
       <tr>
         <th>Email</th>
@@ -55,28 +55,36 @@
         <td>{{ userError.message }}</td>
       </tr>
     </table>
+    <button class="update-button" @click="handleUpdate">Update</button>
   </div>
 </template>
 
 <script>
-export default {
-  props: {
-    name: String,
-    email: String,
-    phone: String,
-    age: Number,
-    gender: String,
-    hobbies: Array,
-    address: Object,
-    birthdate: Date,
-    website: String,
-    picture: String,
-    isEmployed: Boolean,
-    userFunction: Function, 
-    userSymbol: Symbol,     
-    userError: Error       
-  }
-}
+    export default {
+        props: {
+            fullname: String,
+            email: String,
+            phone: String,
+            age: Number,
+            gender: String,
+            hobbies: Array,
+            address: Object,
+            birthdate: Date,
+            website: String,
+            picture: String,
+            isEmployed: Boolean,
+            userFunction: Function, 
+            userSymbol: Symbol,     
+            userError: Error       
+        },
+        methods: {
+            handleUpdate() {
+                // this.fullname = "Mohammed Hassan"
+                console.log("Update Button is clicked.");
+                this.$emit('updateName', "Mohammed Hassan");
+            }
+        }
+    }
 </script>
 
 <style scoped>
@@ -101,5 +109,11 @@ export default {
 
 .student-details-table tr:hover {
   background-color: #f5f5f5;
+}
+
+.update-button{
+    margin-top: 10px; 
+    padding: 5px; 
+    margin-left: 30px;
 }
 </style>
