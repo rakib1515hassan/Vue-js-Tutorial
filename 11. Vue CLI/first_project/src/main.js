@@ -11,6 +11,9 @@ const app = createApp(App);
 app.component('app-header', AppHeader);
 app.component('app-footer', AppFooter);
 
+
 // createApp(App).mount('#app')
 // Mount the app to the DOM
 app.mount('#app');
+
+
